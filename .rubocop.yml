@@ -1,0 +1,128 @@
+require:
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.5
+  DisplayCopNames: true
+  Exclude:
+    - "vendor/**/*"
+
+Layout/IndentHash:
+  EnforcedStyle: consistent
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+    - "lib/tasks/**/*.rake"
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/LineLength:
+  Max: 130
+  AllowURI: true
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/ModuleLength:
+  Max: 200
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Naming/PredicateName:
+  NamePrefixBlacklist:
+    - is_
+
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - e
+    - id
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/DescribedClass:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/ImplicitExpect:
+  EnforcedStyle: should
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/PredicateMatcher:
+  Enabled: false
+
+RSpec/SharedExamples:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/GuardClause:
+  MinBodyLength: 4
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
