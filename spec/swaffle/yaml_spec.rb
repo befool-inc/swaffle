@@ -7,9 +7,9 @@ RSpec.describe Swaffle::Yaml do
     context "mode all" do
       let(:mode) { :all }
 
-      it "should be parse fully" do
+      it "is parse fully" do
         expect(subject.to_json).to be_json_including({
-          "swagger" =>  "2.0",
+          "swagger" => "2.0",
           "definitions" => {
             "User" => {
               "type" => "object",
@@ -30,7 +30,7 @@ RSpec.describe Swaffle::Yaml do
                     },
                   },
                 },
-              }
+              },
             },
           },
         })
@@ -40,9 +40,9 @@ RSpec.describe Swaffle::Yaml do
     context "mode file" do
       let(:mode) { :file }
 
-      it "should be parse only file path" do
+      it "is parse only file path" do
         expect(subject.to_json).to be_json_including({
-          "swagger" =>  "2.0",
+          "swagger" => "2.0",
           "definitions" => {
             "User" => {
               "type" => "object",
@@ -57,7 +57,7 @@ RSpec.describe Swaffle::Yaml do
                     "schema" => {
                       "properties" => {
                         "user" => {
-                          "$ref" =>  "#/definitions/User",
+                          "$ref" => "#/definitions/User",
                         },
                       },
                     },
@@ -73,9 +73,9 @@ RSpec.describe Swaffle::Yaml do
     context "mode never" do
       let(:mode) { :never }
 
-      it "should be never parse" do
+      it "is never parse" do
         expect(subject.to_json).to be_json_including({
-          "swagger" =>  "2.0",
+          "swagger" => "2.0",
           "definitions" => {
             "$ref" => "./definitions/index.yml",
           },

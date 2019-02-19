@@ -1,5 +1,4 @@
-
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "swaffle/version"
 
@@ -9,11 +8,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ["KIUCHI Satoshinosuke"]
   spec.email         = ["scholar@hayabusa-lab.jp"]
 
-  spec.summary       = %q{Swagger API Library}
-  spec.description   = %q{Swagger API Library}
+  spec.summary       = "Swagger API Library"
+  spec.description   = "Swagger API Library"
   spec.homepage      = "https://github.com/befool-inc/swaffle"
 
-  spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+  spec.files         = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
   spec.bindir        = "bin"
@@ -24,8 +23,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "ruby-swagger", "~> 0.1.1"
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rubocop", "~> 0.65.0"
-  spec.add_development_dependency "rubocop-rspec", "~> 1.32.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rspec-json_matcher", "~> 0.1.6"
+  spec.add_development_dependency "rubocop", "~> 0.65.0"
+  spec.add_development_dependency "rubocop-rspec", "~> 1.32.0"
 end
