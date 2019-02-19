@@ -1,0 +1,16 @@
+swagger: "2.0"
+info:
+  version: 0.0.1
+  title: Swaffle Sample
+  description: This is Swaffle Sample API
+  contact:
+    email: scholar@hayabusa-lab.jp
+schemes:
+  - http
+  - https
+host: example.jp
+tags: []
+paths:
+  $ref: ./paths/index.yml
+definitions:
+  $ref: ./definitions/index.yml

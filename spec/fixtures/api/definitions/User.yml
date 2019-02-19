@@ -1,0 +1,12 @@
+type: object
+properties:
+  id:
+    type: string
+    description: ID
+  nickname:
+    type: string
+    description: nickname
+
+example:
+  id: aqwsedrftgyhujikolp
+  nickname: KIUCHI Satoshinosuke

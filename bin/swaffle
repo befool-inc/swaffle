@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+
+require "json"
+require "optparse"
+require "active_support/core_ext/hash/deep_merge"
+require "swaffle/yaml.rb"
+
+resolve_mode = :all
+opt = OptionParser.new
+opt.on("-r", "--resolve=never|file|all", %i[never file all],
+       "Resolve mode of YAML references. default: all") do |r|
+  resolve_mode = r
+end
+opt.parse!
+
+puts JSON.pretty_generate(Swaffle::Yaml.load(ARGV[0], resolve_mode))

@@ -1,0 +1,22 @@
+operationId: getUser
+description: get user information
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: id
+    type: integer
+    required: true
+responses:
+  200:
+    description: success
+    schema:
+      properties:
+        data:
+          properties:
+            user:
+              $ref: "#/definitions/User"
+    examples:
+      application/json:
+        user:
+          $ref: "#/definitions/User/example"
