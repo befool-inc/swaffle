@@ -11,11 +11,10 @@ responses:
   200:
     description: success
     schema:
+      type: object
       properties:
-        data:
-          properties:
-            user:
-              $ref: "#/definitions/User"
+        user:
+          $ref: "#/definitions/User"
     examples:
       application/json:
         user:
