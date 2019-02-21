@@ -1,0 +1,104 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "Swaffle Sample",
+    "description": "This is Swaffle Sample API",
+    "contact": {
+      "email": "scholar@hayabusa-lab.jp"
+    }
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "host": "example.jp",
+  "tags": [
+
+  ],
+  "paths": {
+    "/users/{id}": {
+      "get": {
+        "operationId": "getUser",
+        "description": "get user information",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "ID"
+                    },
+                    "nickname": {
+                      "type": "string",
+                      "description": "nickname"
+                    }
+                  },
+                  "example": {
+                    "id": "aqwsedrftgyhujikolp",
+                    "nickname": "KIUCHI Satoshinosuke"
+                  },
+                  "required": [
+                    "id",
+                    "nickname"
+                  ]
+                }
+              },
+              "required": [
+                "user"
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": "aqwsedrftgyhujikolp",
+                  "nickname": "KIUCHI Satoshinosuke"
+                }
+              }
+            }
+          }
+        },
+        "summary": "get user information"
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID"
+        },
+        "nickname": {
+          "type": "string",
+          "description": "nickname"
+        }
+      },
+      "example": {
+        "id": "aqwsedrftgyhujikolp",
+        "nickname": "KIUCHI Satoshinosuke"
+      },
+      "required": [
+        "id",
+        "nickname"
+      ]
+    }
+  }
+}
