@@ -48,15 +48,21 @@
                     "nickname": {
                       "type": "string",
                       "description": "nickname"
+                    },
+                    "last_logined_at": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   },
                   "example": {
                     "id": "aqwsedrftgyhujikolp",
-                    "nickname": "KIUCHI Satoshinosuke"
+                    "nickname": "KIUCHI Satoshinosuke",
+                    "last_logined_at": "2017-07-21T17:32:28Z"
                   },
                   "required": [
                     "id",
-                    "nickname"
+                    "nickname",
+                    "last_logined_at"
                   ]
                 }
               },
@@ -68,7 +74,8 @@
               "application/json": {
                 "user": {
                   "id": "aqwsedrftgyhujikolp",
-                  "nickname": "KIUCHI Satoshinosuke"
+                  "nickname": "KIUCHI Satoshinosuke",
+                  "last_logined_at": "2017-07-21T17:32:28Z"
                 }
               }
             }
@@ -89,15 +96,21 @@
         "nickname": {
           "type": "string",
           "description": "nickname"
+        },
+        "last_logined_at": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "example": {
         "id": "aqwsedrftgyhujikolp",
-        "nickname": "KIUCHI Satoshinosuke"
+        "nickname": "KIUCHI Satoshinosuke",
+        "last_logined_at": "2017-07-21T17:32:28Z"
       },
       "required": [
         "id",
-        "nickname"
+        "nickname",
+        "last_logined_at"
       ]
     }
   }

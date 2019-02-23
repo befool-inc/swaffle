@@ -65,7 +65,7 @@ RSpec/ExampleLength:
   Enabled: false
 
 RSpec/ImplicitExpect:
-  EnforcedStyle: should
+  EnforcedStyle: is_expected
 
 RSpec/MultipleExpectations:
   Enabled: false

@@ -6,7 +6,11 @@ properties:
   nickname:
     type: string
     description: nickname
+  last_logined_at:
+    type: string
+    format: date-time
 
 example:
   id: aqwsedrftgyhujikolp
   nickname: KIUCHI Satoshinosuke
+  last_logined_at: "2017-07-21T17:32:28Z"

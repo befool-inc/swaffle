@@ -14,5 +14,9 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  config.define_derived_metadata do |meta|
+    meta[:aggregate_failures] = true
+  end
+
   config.include RSpec::JsonMatcher
 end

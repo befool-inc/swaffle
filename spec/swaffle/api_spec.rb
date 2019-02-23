@@ -30,7 +30,7 @@ RSpec.describe Swaffle::Api do
     let(:method) { "get" }
 
     it "returns operation definition" do
-      expect(subject.to_json).to be_json_including(parameters: [{name: "id"}])
+      expect(subject.to_json).to be_json_including(parameters: [{ name: "id" }])
     end
   end
 

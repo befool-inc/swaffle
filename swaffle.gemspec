@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.executables   = ["swaffle"]
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency "activerecord"
   spec.add_runtime_dependency "activesupport"
   spec.add_runtime_dependency "ruby-swagger", "~> 0.1.1"
   spec.add_development_dependency "bundler", "~> 2.0"
