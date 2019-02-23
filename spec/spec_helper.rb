@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "swaffle"
+require "swaffle/spec/api_request_helper"
 require "rspec/json_matcher"
 require "byebug"
 
@@ -18,5 +19,6 @@ RSpec.configure do |config|
     meta[:aggregate_failures] = true
   end
 
+  config.include Swaffle::Spec::ApiRequestHelper, type: :request
   config.include RSpec::JsonMatcher
 end

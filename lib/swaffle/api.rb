@@ -2,9 +2,6 @@ require "ruby-swagger"
 
 module Swaffle
   class Api
-    @schemata = {}
-    @current = nil
-
     def initialize(hash)
       @data = Swagger::Data::Document.parse(hash)
     end
@@ -36,34 +33,20 @@ module Swaffle
       response
     end
 
-    def self.load_json_file(json_file, key: "@")
+    def self.load_json_file(json_file)
       raise ArgumentError, "no such json file. #{json_file}" unless File.exist?(json_file)
 
-      load_hash(JSON.parse(File.read(json_file)), key: key)
+      load_hash(JSON.parse(File.read(json_file)))
     end
 
-    def self.load_yaml_file(yaml_file, key: "@", mode: :all)
+    def self.load_yaml_file(yaml_file, mode: :all)
       raise ArgumentError, "no such yaml file. #{yaml_file}" unless File.exist?(yaml_file)
 
-      load_hash(Swaffle::Yaml.load(yaml_file, mode), key: key)
+      load_hash(Swaffle::Yaml.load(yaml_file, mode))
     end
 
-    def self.load_hash(hash, key: "@")
-      @schemata[key] = Api.new(hash)
-      self.current = key unless @current_key
-      get(key)
-    end
-
-    def self.get(key = "@")
-      @schemata[key]
-    end
-
-    def self.current=(key)
-      @current_key = key
-    end
-
-    def self.current
-      get(@current_key)
+    def self.load_hash(hash)
+      Api.new(hash)
     end
   end
 end

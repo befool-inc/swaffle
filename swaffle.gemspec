@@ -23,9 +23,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "activesupport"
   spec.add_runtime_dependency "ruby-swagger", "~> 0.1.1"
   spec.add_development_dependency "bundler", "~> 2.0"
+  spec.add_development_dependency "json-schema", "~> 2.8.1"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rspec-json_matcher", "~> 0.1.6"
-  spec.add_development_dependency "rubocop", "~> 0.65.0"
-  spec.add_development_dependency "rubocop-rspec", "~> 1.32.0"
 end

@@ -6,7 +6,7 @@ module Swaffle
 
     def initialize(object, api: nil)
       @object = object
-      @api = api || Swaffle::Api.current
+      @api = api || Swaffle.current
     end
 
     def definition_name
