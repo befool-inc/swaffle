@@ -1,3 +1,5 @@
+require "json-schema"
+
 # レスポンスのスキーマ検証
 RSpec::Matchers.define :match_api_response_schema do # rubocop:disable Metrics/BlockLength
   match do |(path, method, response)|
