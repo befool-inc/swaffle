@@ -70,7 +70,7 @@ module Swaffle
     def self.load_ref_with_path_for_ref(node, root, resolve_ref)
       if resolve_ref
         path = node["$ref"].sub(%r{^#/}, "").split("/")
-        definition = root.dig(*path)
+        definition = dig_definition(root, path)
         load_ref_with_path(definition, root, resolve_ref)
       else
         node
@@ -79,7 +79,7 @@ module Swaffle
 
     def self.load_ref_with_path_for_merge(node, root, resolve_ref)
       path = node["$merge"].sub(%r{^#/}, "").split("/")
-      definition = root.dig(*path)
+      definition = dig_definition(root, path)
       hash = load_ref_with_path(definition, root, resolve_ref)
 
       if node.count > 1
@@ -89,6 +89,32 @@ module Swaffle
       end
 
       hash
+    end
+
+    # definition内に存在する $merge や $ref を展開してdefinitionを取得する
+    def self.dig_definition(root, paths)
+      definition = nil
+
+      node = root
+      paths.each do |path|
+        node = node[path]
+        raise "no such  definition.  #{paths.join("/")}" unless node
+
+        if node.key?("$ref") && node["$ref"].start_with?("#/")
+          node  = dig_definition(root, node["$ref"].sub(%r{^#/}, "").split("/"))
+        elsif node.key?("$merge") && node["$merge"].start_with?("#/")
+          hash  = dig_definition(root, node["$merge"].sub(%r{^#/}, "").split("/"))
+          if node.count > 1
+            remains = node.to_a.reject { |k, _| k == "$merge" }.to_h
+            hash = hash.deep_merge(remains)
+          end
+          node = hash
+        end
+
+        definition = node
+      end
+
+      definition
     end
 
     # ファイルパスを解決する
