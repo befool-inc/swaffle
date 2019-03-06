@@ -17,23 +17,14 @@ RSpec::Matchers.define :match_api_response_schema do # rubocop:disable Metrics/B
     @responses = @operation.responses
 
     case response.status
-    # 成功系はpath定義からスキーマを取得する
-    when 200..299
-      # schemaの定義必須
+    when 500
+      # 500系はそもそもテスト失敗
+      return false
+
+    else
       return false unless @responses[response.status.to_s]
 
       schema = swagger.response_schema(path, method, response.status).schema
-
-    # 500系はそもそもテスト失敗
-    when 500
-      return false
-    # エラー系はdefinitions定義からスキーマを取得する
-    else
-      schema = if @responses[response.status.to_s]
-                 swagger.response_schema(path, method, response.status).schema
-               else
-                 swagger.definition("ResponseError")
-               end
     end
 
     @schema = schema.as_swagger
