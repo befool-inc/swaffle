@@ -66,6 +66,12 @@ module Swaffle
         end
       when "string"
         object&.to_s
+      when "number"
+        if  definition.format == "float" || definition.format == "double"
+          object&.to_f
+        else
+          object&.to_i
+        end
       else
         object
       end
