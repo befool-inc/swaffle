@@ -1,0 +1,12 @@
+type: object
+properties:
+  id:
+    type: string
+    description: ID
+  name:
+    type: string
+    description: name
+
+example:
+  id: aqwsedrftgyhujikolp
+  nickname: foo

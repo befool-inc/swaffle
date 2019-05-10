@@ -28,15 +28,7 @@ module Swaffle
           load_file_with_ref(target_file, root)
         elsif node.key?("$merge") && !node["$merge"].start_with?("#/")
           target_file = resolve_file_path(node["$merge"], path, root)
-          hash = load_file_with_ref(target_file, root)
-
-          if node.count > 1
-            remains = node.to_a.reject { |k, _| k == "$merge" }
-            remain_hash = remains.map { |k, v| [k, load_ref_with_file(v, path, root)] }.to_h
-            hash = hash.deep_merge(remain_hash)
-          end
-
-          hash
+          load_file_with_ref(target_file, root)
         else
           node.map { |k, v| [k, load_ref_with_file(v, path, root)] }.to_h
         end
@@ -71,7 +63,14 @@ module Swaffle
       if resolve_ref
         path = node["$ref"].sub(%r{^#/}, "").split("/")
         definition = dig_definition(root, path)
-        load_ref_with_path(definition, root, resolve_ref)
+        hash = load_ref_with_path(definition, root, resolve_ref)
+
+        if node.count > 1
+          remain = node.to_a.reject { |k, _| k == "$ref" }.to_h
+          hash = hash.deep_merge(remain)
+        end
+
+        hash
       else
         node
       end
@@ -98,20 +97,15 @@ module Swaffle
       node = root
       paths.each do |path|
         node = node[path]
-        raise "no such  definition.  #{paths.join("/")}" unless node
+        raise "no such definition. #{paths.join("/")}" unless node
 
-        if node.key?("$ref") && node["$ref"].start_with?("#/")
-          node  = dig_definition(root, node["$ref"].sub(%r{^#/}, "").split("/"))
-        elsif node.key?("$merge") && node["$merge"].start_with?("#/")
-          hash  = dig_definition(root, node["$merge"].sub(%r{^#/}, "").split("/"))
-          if node.count > 1
-            remains = node.to_a.reject { |k, _| k == "$merge" }.to_h
-            hash = hash.deep_merge(remains)
-          end
-          node = hash
-        end
-
-        definition = node
+        definition = if node.key?("$ref") && node["$ref"].start_with?("#/")
+                       dig_definition(root, node["$ref"].sub(%r{^#/}, "").split("/"))
+                     elsif node.key?("$merge") && node["$merge"].start_with?("#/")
+                       dig_definition(root, node["$merge"].sub(%r{^#/}, "").split("/"))
+                     else
+                       node
+                     end
       end
 
       definition

@@ -9,8 +9,13 @@ properties:
   last_logined_at:
     type: string
     format: date-time
+  team:
+    $ref: "#/definitions/Team"
+    optional: true
 
 example:
   id: aqwsedrftgyhujikolp
   nickname: KIUCHI Satoshinosuke
   last_logined_at: "2017-07-21T17:32:28Z"
+  team:
+    $ref: "#/definitions/Team/example"

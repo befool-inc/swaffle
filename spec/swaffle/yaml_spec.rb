@@ -34,6 +34,8 @@ RSpec.describe Swaffle::Yaml do
             },
           },
         })
+
+        expect(subject["definitions"]["User"]["required"]).not_to include("team")
       end
     end
 
@@ -67,6 +69,8 @@ RSpec.describe Swaffle::Yaml do
             },
           },
         })
+
+        expect(subject["definitions"]["User"]["required"]).not_to include("team")
       end
     end
 

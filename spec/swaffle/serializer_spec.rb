@@ -1,4 +1,5 @@
 require_relative "../fixtures/models/user"
+require_relative "../fixtures/models/team"
 require_relative "../fixtures/serializers/user_serializer"
 require_relative "../fixtures/serializers/current_user_serializer"
 
