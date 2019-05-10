@@ -41,6 +41,7 @@ module Swaffle
       Swaffle::Serializer.serialize(self, definition)
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
     def self.serialize(object, definition)
       definition = Swagger::Data::Schema.parse(definition) unless definition.is_a?(Swagger::Data::Schema)
 
@@ -67,7 +68,7 @@ module Swaffle
       when "string"
         object&.to_s
       when "number"
-        if  definition.format == "float" || definition.format == "double"
+        if definition.format == "float" || definition.format == "double"
           object&.to_f
         else
           object&.to_i
@@ -76,6 +77,7 @@ module Swaffle
         object
       end
     end
+    # rubocop:enable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
 
     def self.get_value(object, key)
       value = if object.nil?

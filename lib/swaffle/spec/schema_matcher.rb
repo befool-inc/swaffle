@@ -37,7 +37,7 @@ RSpec::Matchers.define :match_api_response_schema do # rubocop:disable Metrics/B
     return "has happened something error." + base if response.status >= 500
     return "expected has operation '#{method} #{path}', but not found." + base unless @operation
     unless @produces.include?(response.content_type)
-      return "expected has produce in '#{@produces.join(',')}', but not found." + base
+      return "expected has produce in '#{@produces.join(",")}', but not found." + base
     end
     return "expected has response schema '#{method} #{path} (status:#{response.status})', but not found." + base unless @schema
 
