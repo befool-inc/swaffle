@@ -28,7 +28,15 @@ module Swaffle
           load_file_with_ref(target_file, root)
         elsif node.key?("$merge") && !node["$merge"].start_with?("#/")
           target_file = resolve_file_path(node["$merge"], path, root)
-          load_file_with_ref(target_file, root)
+          hash = load_file_with_ref(target_file, root)
+
+          if node.count > 1
+            remains = node.to_a.reject { |k, _| k == "$merge" }
+            remain_hash = remains.map { |k, v| [k, load_ref_with_file(v, path, root)] }.to_h
+            hash = hash.deep_merge(remain_hash)
+          end
+
+          hash
         else
           node.map { |k, v| [k, load_ref_with_file(v, path, root)] }.to_h
         end
@@ -99,13 +107,18 @@ module Swaffle
         node = node[path]
         raise "no such definition. #{paths.join("/")}" unless node
 
-        definition = if node.key?("$ref") && node["$ref"].start_with?("#/")
-                       dig_definition(root, node["$ref"].sub(%r{^#/}, "").split("/"))
-                     elsif node.key?("$merge") && node["$merge"].start_with?("#/")
-                       dig_definition(root, node["$merge"].sub(%r{^#/}, "").split("/"))
-                     else
-                       node
-                     end
+        if node.key?("$ref") && node["$ref"].start_with?("#/")
+          node  = dig_definition(root, node["$ref"].sub(%r{^#/}, "").split("/"))
+        elsif node.key?("$merge") && node["$merge"].start_with?("#/")
+          hash  = dig_definition(root, node["$merge"].sub(%r{^#/}, "").split("/"))
+          if node.count > 1
+            remains = node.to_a.reject { |k, _| k == "$merge" }.to_h
+            hash = hash.deep_merge(remains)
+          end
+          node = hash
+        end
+
+        definition = node
       end
 
       definition
