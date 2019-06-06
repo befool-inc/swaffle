@@ -1,7 +1,4 @@
-require "active_record"
-
-class User
-  include ActiveModel::Model
-
-  attr_accessor :id, :nickname, :last_logined_at, :team
+class User < ActiveRecord::Base
+  belongs_to :team
+  belongs_to :belong, polymorphic: true
 end

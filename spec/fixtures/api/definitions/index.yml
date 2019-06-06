@@ -1,5 +1,7 @@
 ---
 User:
   $ref: ./User.yml
+Organization:
+  $ref: ./Organization.yml
 Team:
   $ref: ./Team.yml

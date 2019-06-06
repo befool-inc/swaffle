@@ -58,10 +58,10 @@ module Swaffle
         when nil, ::String, ::Numeric, ::Array
           object
         when ActiveRecord::Base
-          serialize(object.serializer, definition)
+          serialize(find_serializer(object), definition)
         else
           definition.properties
-                    .map { |key, schema| [key, serialize(Swaffle::Serializer.get_value(object, key), schema)] }
+                    .map { |key, schema| [key, serialize(get_value(object, key), schema)] }
                     .to_h
                     .reject { |key, value| value.nil? && !definition.required.include?(key) }
         end
@@ -74,7 +74,12 @@ module Swaffle
           object&.to_i
         end
       else
-        object
+        case object
+        when ActiveRecord::Base
+          find_serializer(object).as_json
+        else
+          object
+        end
       end
     end
     # rubocop:enable Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity

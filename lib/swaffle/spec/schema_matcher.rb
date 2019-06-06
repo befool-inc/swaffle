@@ -115,6 +115,10 @@ RSpec::Matchers.define :match_api_response_schema do # rubocop:disable Metrics/B
       schema["items"] = resolve_nullable(schema["items"])
     end
 
+    if schema["oneOf"]
+      schema["oneOf"].map! { |item| resolve_nullable(item) }
+    end
+
     schema
   end
 end

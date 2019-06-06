@@ -1,12 +1,14 @@
 require_relative "../fixtures/models/user"
 require_relative "../fixtures/models/team"
+require_relative "../fixtures/models/organization"
 require_relative "../fixtures/serializers/user_serializer"
 require_relative "../fixtures/serializers/current_user_serializer"
 
 RSpec.describe Swaffle::Serializer do
   let(:yaml_file) { File.expand_path("../fixtures/api/schema.yml", __dir__) }
   let(:now) { Time.now }
-  let(:object) { User.new(id: "a", nickname: "KIUCHI Satoshinosuke", last_logined_at: now) }
+  let(:object) { User.new(id: 1, nickname: "KIUCHI Satoshinosuke", last_logined_at: now, belong: organization) }
+  let(:organization) { Organization.new(id: 2, name: "BEFOOL") }
   let(:serialized) { serializer.new(object) }
   let(:serializer) { described_class }
 
@@ -39,7 +41,7 @@ RSpec.describe Swaffle::Serializer do
     subject { serialized.as_json }
 
     it do
-      expect(subject).to include("id" => "a", "nickname" => "KIUCHI Satoshinosuke")
+      expect(subject.to_json).to be_json_including("id" => 1, "nickname" => "KIUCHI Satoshinosuke", "belong" => { "name" => "BEFOOL" })
     end
   end
 

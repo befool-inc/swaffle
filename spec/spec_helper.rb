@@ -1,8 +1,11 @@
 require "bundler/setup"
+require "active_record"
 require "swaffle"
 require "swaffle/spec/api_request_helper"
 require "rspec/json_matcher"
 require "byebug"
+
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

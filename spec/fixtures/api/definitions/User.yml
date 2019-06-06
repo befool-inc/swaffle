@@ -1,7 +1,7 @@
 type: object
 properties:
   id:
-    type: string
+    type: integer
     description: ID
   nickname:
     type: string
@@ -12,10 +12,16 @@ properties:
   team:
     $ref: "#/definitions/Team"
     optional: true
+  belong:
+    oneOf:
+      - $ref: "#/definitions/Team"
+      - $ref: "#/definitions/Organization"
 
 example:
-  id: aqwsedrftgyhujikolp
+  id: 1
   nickname: KIUCHI Satoshinosuke
   last_logined_at: "2017-07-21T17:32:28Z"
   team:
     $ref: "#/definitions/Team/example"
+  belong:
+    $ref: "#/definitions/Organization/example"
