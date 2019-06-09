@@ -73,6 +73,8 @@ module Swaffle
         else
           object&.to_i
         end
+      when "integer"
+        object&.to_i
       else
         case object
         when ActiveRecord::Base
